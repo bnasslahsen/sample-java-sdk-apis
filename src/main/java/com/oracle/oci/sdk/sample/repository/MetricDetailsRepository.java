@@ -59,10 +59,9 @@ public class MetricDetailsRepository {
 											.endTime(NOW)
 											.build())
 							.build();
-			LOGGER.debug("Request constructed:\n%s\n\n", request.getSummarizeMetricsDataDetails());
 			final SummarizeMetricsDataResponse response =
 					monitoringClient.summarizeMetricsData(request);
-			LOGGER.debug("%s\n", response.getItems().toString());
+			LOGGER.debug(response.getItems().toString());
 			if (!CollectionUtils.isEmpty(response.getItems())){
 				return response.getItems().get(0).getAggregatedDatapoints().get(0).getValue();
 			}
@@ -86,8 +85,6 @@ public class MetricDetailsRepository {
 	}
 
 	private MonitoringClient getMonitoringClient() {
-		final MonitoringClient monitoringClient = new MonitoringClient(pemConfig.getAuthenticationDetailsProvider());
-		monitoringClient.setRegion(pemConfig.getRegion());
-		return monitoringClient;
+		return new MonitoringClient(pemConfig.getAuthenticationDetailsProvider());
 	}
 }

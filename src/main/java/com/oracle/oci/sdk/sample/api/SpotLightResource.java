@@ -40,4 +40,11 @@ public class SpotLightResource {
 	public MetricDetails getMetrics(@RequestParam String ocid, @RequestParam String compartmentId) {
 		return metricDetailsRepository.getMetrics(ocid, compartmentId);
 	}
+
+	@GetMapping("/instances")
+	public String getMetrics(@RequestParam String ocid) {
+		return computeRepository.getInstanceStatus(ocid);
+	}
+
+
 }
